@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://timikplay.github.io/Avtodim-site/sitemap.xml

@@ -2,12 +2,31 @@
 <html lang="uk">
 <head>
   <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Автозапчастини у Ковелі – Автодім. Перевір наявність, дізнайся ціну, замов зручно онлайн!" />
-  <meta name="keywords" content="автозапчастини Ковель, автомагазин Ковель, Автодім, купити запчастини, масло, фільтр, лампа" />
+
+  <!-- SEO -->
+  <title>Каталог автозапчастин – Автодім Ковель | Наявність, ціни, замовлення</title>
+  <meta name="description" content="Каталог автозапчастин у Ковелі. Магазин Автодім – актуальні ціни, наявність, зручне замовлення онлайн або в магазині." />
+  <meta name="keywords" content="каталог автозапчастин, автозапчастини Ковель, Автодім Ковель, автомагазин, масло, фільтри, лампи, автоаксесуари" />
   <meta name="author" content="Chimurai" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Каталог автозапчастин – Автодім Ковель" />
+  <meta property="og:description" content="Перевір наявність, ціни та зроби замовлення автозапчастин в Автодім, Ковель. Величезний вибір!" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://timikplay.github.io/Avtodim-site/catalog.html" />
+  <meta property="og:image" content="https://timikplay.github.io/Avtodim-site/images/preview.jpg" />
+  <meta property="og:locale" content="uk_UA" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://timikplay.github.io/Avtodim-site/catalog.html" />
+
+  <!-- Стили і фавікон -->
   <link rel="stylesheet" href="styles/style_catalog.css" />
-  <title>Каталог – Автодім Ковель</title>
+  <link rel="shortcut icon" href="images/icon.ico" type="image/x-icon" />
 </head>
 <body>
   <div class="container">
@@ -20,6 +39,9 @@
     </header>
 
     <main class="main">
+      <h2>Знайди потрібні запчастини легко</h2>
+      <p>Використай фільтри, щоб швидко знайти товар, який тобі потрібен.</p>
+
       <div class="filters">
         <label>Категорія:
           <select id="filter-category">
@@ -40,6 +62,7 @@
           <input type="text" id="filter-name" placeholder="Введіть текст для пошуку" />
         </label>
       </div>
+
       <div class="stats" id="stats"></div>
       <div class="grid" id="catalog"></div>
       <button class="show-all" onclick="resetFilters()">Показати всі товари</button>
