@@ -1,0 +1,186 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f4;
+}
+header, footer {
+    background: #222;
+    color: #fff;
+    padding: 1rem;
+    text-align: center;
+}
+nav a {
+    margin: 0 1rem;
+    color: #ffc107;
+    text-decoration: none;
+    font-weight: bold;
+}
+main {
+    padding: 2rem;
+    max-width: 1;
+    margin: 0 auto;
+}
+.filters {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+.filters label {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.9rem;
+    min-width: 160px;
+}
+
+input[type="number"],
+input[type="text"],
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: #fff;
+    border: 2px solid #ccc;
+    border-radius: 12px;
+    padding: 10px 16px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #333;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    outline: none;
+}
+
+input[type="number"]:focus,
+input[type="text"]:focus,
+select:focus {
+    border-color: #6a5acd;
+    box-shadow: 0 0 8px 2px rgba(106, 90, 205, 0.5);
+    background-color: #fafafa;
+}
+
+input[type="number"]::placeholder,
+input[type="text"]::placeholder {
+    color: #aaa;
+    font-style: italic;
+    transition: color 0.3s ease;
+}
+
+input[type="number"]:focus::placeholder,
+input[type="text"]:focus::placeholder {
+    color: transparent;
+}
+
+select {
+    cursor: pointer;
+    padding-right: 40px;
+    background-image:
+    linear-gradient(45deg, transparent 50%, #555 50%),
+    linear-gradient(135deg, #555 50%, transparent 50%);
+    background-position:
+    calc(100% - 20px) center,
+    calc(100% - 15px) center;
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
+}
+
+select:focus {
+    background-image:
+    linear-gradient(45deg, transparent 50%, #6a5acd 50%),
+    linear-gradient(135deg, #6a5acd 50%, transparent 50%);
+}
+
+
+/* Сітка на всю ширину */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    width: 100%;
+}
+
+.card {
+    background: #fff;
+    border-radius: 1rem;
+    padding: 1rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    cursor: pointer;
+}
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+.card img {
+    width: 100%;
+    height: 140px;
+    object-fit: contain;
+    border-radius: 0.5rem;
+    background: #fff;
+}
+.card h3 {
+    font-size: 1.1rem;
+    margin: 0.5rem 0 0;
+}
+.card p {
+    font-size: 0.9rem;
+    margin: 0.2rem 0;
+    color: #444;
+}
+.card .price {
+    font-weight: bold;
+    color: #d35400;
+    margin-top: 0.4rem;
+}
+.card .index {
+    font-size: 0.8rem;
+    color: #666;
+}
+.card .watermark {
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    font-size: 0.7rem;
+    color: rgba(0,0,0,0.3);
+}
+.stats {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    color: #333;
+    text-align: center;
+}
+.show-all {
+    margin: 1.5rem auto 0;
+    display: block;
+    padding: 0.7rem 2rem;
+    background: #ffc107;
+    color: #000;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    max-width: 200px;
+    transition: background-color 0.3s ease;
+}
+.show-all:hover {
+    background-color: #e0a800;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main {
+    flex: 1;
+    width: 100%;
+}
+
+.footer {
+    margin-top: auto;
+}
