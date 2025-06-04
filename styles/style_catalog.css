@@ -16,6 +16,10 @@ nav a {
     text-decoration: none;
     font-weight: bold;
 }
+nav a:hover {
+    color: #e0a800;
+    transition: color 0.3s ease;
+}
 main {
     padding: 2rem;
     max-width: 1;
@@ -201,4 +205,94 @@ p {
   max-width: 600px;
   margin: 0 auto 2rem auto;
   line-height: 1.6;
+}
+
+.footer {
+  background: #222;
+  color: #fff;
+  padding: 2rem 1rem;
+  text-align: left;
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-section {
+  flex: 1 1 200px;
+}
+
+.footer-section h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  color: #ffc107;
+}
+
+.footer-section p,
+.footer-section ul,
+.footer-section a {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #eee;
+  text-decoration: none;
+}
+
+.footer p {
+  text-align: left;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section a:hover {
+  text-decoration: underline;
+  color: #ffc107;
+}
+
+.feedback-button {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.7rem 1.5rem;
+  background-color: #ffc107;
+  color: #000;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.feedback a {
+    color: #333;
+}
+
+.feedback a:hover {
+    color: #222;
+}
+
+.feedback-button:hover {
+  background-color: #e0a800;
+}
+
+.footer-bottom {
+  margin-top: 2rem;
+  border-top: 1px solid #444;
+  padding-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.dev-note {
+  color: #666;
+  font-size: 0.75rem;
+  margin-left: auto;
 }

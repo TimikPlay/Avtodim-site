@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Написати нам – Автодім</title>
+  <link rel="stylesheet" href="styles/style_index.css" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const btn = document.querySelector(".contact-form button");
+      if (btn) {
+        btn.disabled = true;
+        setTimeout(() => btn.disabled = false, 3000);
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>Напишіть нам</h1>
+      <nav>
+        <a href="index.html">Головна</a>
+        <a href="catalog.html">Каталог</a>
+        <a href="privacy.html">Політика конфіденційності</a>
+        <a href="delivery.html">Доставка</a>
+      </nav>
+    </header>
+
+    <main class="main">
+      <h2>Зворотний зв’язок</h2>
+      <form class="contact-form" action="https://formspree.io/f/manjygrg" method="POST">
+        <label for="name">Ім’я:</label>
+        <input type="text" id="name" name="name" required />
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="phone">Телефон (необов’язково):</label>
+        <input type="tel" id="phone" name="phone" />
+
+        <label for="message">Повідомлення:</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+
+        <div style="display: none;">
+          <label for="website">Ваш сайт</label>
+          <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+        </div>
+
+        <button type="submit">Надіслати</button>
+      </form>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section contact">
+          <h3>Контакти</h3>
+          <p><strong>Адреса:</strong> м. Ковель, вул. Ветеранів, 2</p>
+          <p><strong>Телефони:</strong><br>
+            <a href="tel:+380689011715">+380 68 901 1715</a><br>
+            <a href="tel:+380677860763">+380 67 786 0763</a>
+          </p>
+          <p><strong>Email:</strong><br>
+            <a href="mailto:avtodimkovel@gmail.com">avtodimkovel@gmail.com</a>
+          </p>
+        </div>
+
+        <div class="footer-section schedule">
+          <h3>Графік роботи</h3>
+          <p>Вт–Нд: 08:00–18:00<br>
+            Пн: вихідний</p>
+        </div>
+
+        <div class="footer-section nav">
+          <h3>Навігація</h3>
+          <ul>
+            <li><a href="index.html">Головна</a></li>
+            <li><a href="catalog.html">Каталог</a></li>
+            <li><a href="privacy.html">Політика конфіденційності</a></li>
+            <li><a href="delivery.html">Доставка та оплата</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section socials">
+          <h3>Ми в соцмережах</h3>
+          <p>—</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 Автодім. Всі права захищені.</p>
+        <small class="dev-note">Розроблено Chimurai</small>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
