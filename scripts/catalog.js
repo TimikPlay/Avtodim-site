@@ -229,7 +229,7 @@ function showCatalog() {
         <img src="${item.Фото?.trim() || 'https://i.postimg.cc/8c3tnzSz/1211233-200.png'}" alt="${item.Назва?.trim() || 'Без назви'}" />
         <h3>${item.Назва?.trim() || 'Без назви'}</h3>
         <p class="index">Індекс: ${item.Індекс?.trim() || 'Невідомо'}</p>
-        <p>${item.Опис?.trim() || 'Опис відсутній.'}</p>
+        <p class="description">${truncateText(item.Опис?.trim(), 50)}</p>
         <p class="price">${(item.Ціна ? item.Ціна.toLocaleString() + ' грн' : 'Ціна не вказана')}</p>
         <p>Наявність: <strong>${stockDisplay}</strong></p>
         <div class="watermark">Автодім</div>
@@ -242,6 +242,12 @@ function showCatalog() {
 function showStats() {
   statsEl.textContent = `Знайдено товарів: ${filteredData.length}`;
 }
+
+function truncateText(text, maxLength) {
+  if (!text) return 'Опис відсутній.';
+  return text.length > maxLength ? text.slice(0, maxLength) + '…' : text;
+}
+
 
 function resetFilters() {
   categorySelect.value = '';
