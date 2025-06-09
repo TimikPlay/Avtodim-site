@@ -33,7 +33,7 @@
       display: flex;
       gap: 2rem;
       align-items: flex-start;
-      height: 73vh;
+      height: 100%;
       min-height: 300px;
     }
 
@@ -69,18 +69,15 @@
       cursor: zoom-in;
     }
 
-    /* Опис - така ж висота, що і картинка */
     .product-info {
       flex: 1 1 auto;
       max-width: calc(60vw - 2.5rem);
-      height: max-content; /* щоб відповідати висоті контейнера main */
+      height: 100%;
       background: #fff;
       border-radius: 0.7rem;
       padding: 2rem;
       overflow-y: auto;
-      box-shadow:
-        0 8px 16px rgba(0,0,0,0.1),
-        0 4px 8px rgba(0,0,0,0.06);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1), 0 4px 8px rgba(0,0,0,0.06);
       box-sizing: border-box;
       text-align: left;
       line-height: 1.6;
@@ -282,7 +279,6 @@
       .product-image {
         max-width: 100%;
         width: 100%;
-        max-height: 260px;
         height: auto;
         margin: 0;
         border-radius: 0.7rem 0.7rem 0 0;

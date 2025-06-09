@@ -5,7 +5,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- SEO -->
   <title>Каталог автозапчастин – Автодім Ковель | Наявність, ціни, замовлення</title>
   <meta name="description" content="Каталог автозапчастин у Ковелі. Магазин Автодім – актуальні ціни, наявність, зручне замовлення онлайн або в магазині." />
   <meta name="keywords" content="каталог автозапчастин, автозапчастини Ковель, Автодім Ковель, автомагазин, масло, фільтри, лампи, автоаксесуари" />
@@ -13,7 +12,6 @@
   <meta name="robots" content="index, follow" />
   <meta name="theme-color" content="#ffffff" />
 
-  <!-- Open Graph -->
   <meta property="og:title" content="Каталог автозапчастин – Автодім Ковель" />
   <meta property="og:description" content="Перевір наявність, ціни та зроби замовлення автозапчастин в Автодім, Ковель. Величезний вибір!" />
   <meta property="og:type" content="website" />
@@ -21,12 +19,10 @@
   <meta property="og:image" content="https://timikplay.github.io/Avtodim-site/images/preview.jpg" />
   <meta property="og:locale" content="uk_UA" />
 
-  <!-- Canonical -->
   <link rel="canonical" href="https://timikplay.github.io/Avtodim-site/catalog.html" />
 
-  <!-- Стили і фавікон -->
   <link rel="stylesheet" href="styles/style_catalog.css" />
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZN6WXD6MSF"></script>
   <script async src="/Avtodim-site/scripts/analytics.js"></script>
 </head>
@@ -47,24 +43,40 @@
       <p>Використай фільтри, щоб швидко знайти товар, який тобі потрібен.</p>
 
       <div class="filters">
-        <label>Категорія:
-          <select id="filter-category">
-            <option value="">Усі</option>
-          </select>
-        </label>
-        <label>Наявність:
-          <select id="filter-stock">
-            <option value="">Усі</option>
-            <option value="так">В наявності</option>
-            <option value="ні">Немає</option>
-          </select>
-        </label>
-        <label>Макс. ціна:
-          <input type="number" id="filter-price" placeholder="Напр. 1000" />
-        </label>
-        <label>Пошук по назві, опису, індексу:
-          <input type="text" id="filter-name" placeholder="Введіть текст для пошуку" />
-        </label>
+        <div class="category-filters">
+          <label>Категорія:
+            <select id="filter-category">
+              <option value="">Усі</option>
+            </select>
+          </label>
+          <label>Група:
+            <select id="filter-group" disabled>
+              <option value="">Усі</option>
+            </select>
+          </label>
+          <label>Підгрупа:
+            <select id="filter-subgroup" disabled>
+              <option value="">Усі</option>
+            </select>
+          </label>
+        </div>
+        
+        <div class="data-filters">
+          <label>Наявність:
+            <select id="filter-stock">
+              <option value="">Усі</option>
+              <option value="так">В наявності</option>
+              <option value="ні">Немає</option>
+            </select>
+          </label>
+          <label>Макс. ціна:
+            <input type="number" id="filter-price" placeholder="Напр. 1000" />
+          </label>
+          <label>Пошук по назві, опису, індексу:
+            <input type="text" id="filter-name" placeholder="Введіть текст для пошуку" />
+          </label>
+        </div>
+        
       </div>
 
       <div class="stats" id="stats"></div>
@@ -111,12 +123,12 @@
       </div>
 
       <div class="footer-bottom">
-        <p>&copy; 2025 Автодім. Всі права захищені.</p>
+        <p style="margin: 0;">&copy; 2025 Автодім. Всі права захищені.</p>
         <small class="dev-note">Розроблено Chimurai</small>
       </div>
     </footer>
-
-    <script src="scripts/catalog.js"></script>
   </div>
+
+  <script src="scripts/catalog.js"></script>
 </body>
 </html>
