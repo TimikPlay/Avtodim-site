@@ -243,32 +243,109 @@
     margin-left: auto;
     }
 
+    .content-container {
+      max-width: 90%;
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start;
+      height: 73vh;
+      min-height: 300px;
+    }
+
     /* Адаптив */
-    @media (max-width: 1024px) {
+    @media (max-width: 600px) {
+      header, footer {
+        padding: 0.8rem 0.6rem;
+        font-size: 1rem;
+      }
+
       main {
         flex-direction: column;
         height: auto;
-        padding: 0 1rem 1rem 1rem;
+        padding: 1rem 0.5rem;
+        gap: 1rem;
       }
+
+      #product-details {
+        flex-direction: column;
+      }
+      
+      .content-container {
+        height: auto !important;
+        min-height: 300px;
+      }
+
+      .product-buttons button {
+        height: 40%;
+      }
+
       .product-image {
         max-width: 100%;
-        max-height: 300px;
+        width: 100%;
+        max-height: 260px;
         height: auto;
-        margin-left: 0;
-        margin-bottom: 1rem;
+        margin: 0;
         border-radius: 0.7rem 0.7rem 0 0;
       }
+
       .product-info {
         max-width: 100%;
-        height: auto;
+        width: 100%;
+        padding: 1.2rem 1rem;
+        font-size: 1rem;
         border-radius: 0 0 0.7rem 0.7rem;
-        padding: 1rem 1rem 2rem 1rem;
-        box-shadow: none;
+        overflow-y: visible;
       }
-      .back-to-catalog {
-        margin-bottom: 1rem;
+
+      .product-info h1 {
+        font-size: 1.6rem;
+      }
+
+      .product-buttons {
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+
+      .product-buttons button {
+        width: 100%;
+        flex: 1 1 100px; /* раніше було 140px */
+        min-width: 100px;
+        padding: 0.5rem 1rem; /* було 0.9rem 1.6rem */
+        font-size: 0.9rem; /* зменшено */
+        border-radius: 0.5rem; /* трохи менше округлість */
+      }
+
+      .message {
+        font-size: 1rem;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 1rem 0.5rem;
+      }
+
+      .footer-section h3 {
+        font-size: 1rem;
+      }
+
+      .footer-section p,
+      .footer-section a {
+        font-size: 0.9rem;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        font-size: 0.8rem;
+      }
+
+      .dev-note {
+        margin-left: 0;
       }
     }
+
   </style>
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZN6WXD6MSF"></script>
@@ -280,7 +357,7 @@
     <a href="catalog.html" class="back-to-catalog">← Повернутись у каталог</a>
   </header>
 
-  <main id="content-container" style="max-width: 90%; display: flex; gap: 2rem; align-items: flex-start; height: 73vh; min-height: 300px;">
+  <main id="content-container">
     <div id="product-details" style="width: 100%; display: flex; align-items: flex-start; gap: 2rem; height: 100%;">
       <p class="message">Завантаження...</p>
     </div>
@@ -329,67 +406,6 @@
       </div>
     </footer>
 
-  <script>
-    const params = new URLSearchParams(location.search);
-    const productIndex = params.get('index');
-    const container = document.getElementById('product-details');
-
-    if (!productIndex) {
-      container.innerHTML = '<p class="message">Помилка: індекс товару не вказаний.</p>';
-    } else {
-      fetch('https://opensheet.vercel.app/1ahWQuOhEWDdSq2IA-COaztHe1Fmwzs82zpLTL8jSfc8/Лист1')
-        .then(res => res.json())
-        .then(data => {
-          const item = data.find(x => x.Індекс?.trim() === productIndex.trim());
-          if (!item) {
-            container.innerHTML = '<p class="message">Товар не знайдено.</p>';
-            return;
-          }
-
-          container.innerHTML = `
-            <div class="product-image" aria-label="Фото товару">
-              <img src="${item.Фото?.trim() || 'https://i.postimg.cc/8c3tnzSz/1211233-200.png'}" alt="${item.Назва || 'Фото товару'}" id="productImage" />
-            </div>
-            <div class="product-info">
-              <h1>${item.Назва || 'Без назви'}</h1>
-              <p><strong>Опис:</strong> ${item.Опис || 'Немає опису.'}</p>
-              <p><strong>Ціна:</strong> ${item.Ціна ? Number(item.Ціна).toLocaleString() + ' грн' : 'Не вказана'}</p>
-              <p><strong>Наявність:</strong> ${item.Наявність || 'Невідомо'}</p>
-              <p><strong>Індекс:</strong> ${item.Індекс || '-'}</p>
-              <div class="product-buttons">
-                <button disabled>🛒 Додати в кошик</button>
-                <button disabled>❤️ Вподобати</button>
-                <button disabled>📞 Уточнити у продавця</button>
-              </div>
-            </div>
-          `;
-
-          const productImage = document.getElementById('productImage');
-          let zoomed = false;
-
-          productImage.addEventListener('mouseenter', () => {
-            productImage.style.transition = 'transform 0.3s ease';
-            productImage.style.transform = 'scale(1.2)';
-            zoomed = true;
-          });
-          productImage.addEventListener('mouseleave', () => {
-            productImage.style.transform = 'scale(1)';
-            zoomed = false;
-          });
-          productImage.addEventListener('mousemove', e => {
-            if (!zoomed) return;
-            const rect = productImage.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const xPercent = x / rect.width * 100;
-            const yPercent = y / rect.height * 100;
-            productImage.style.transformOrigin = `${xPercent}% ${yPercent}%`;
-          });
-        })
-        .catch(() => {
-          container.innerHTML = '<p class="message">Не вдалося завантажити товар.</p>';
-        });
-    }
-  </script>
+  <script src="scripts/product.js"></script>
 </body>
 </html>
