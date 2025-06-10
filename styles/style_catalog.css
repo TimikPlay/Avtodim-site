@@ -151,6 +151,7 @@ select:focus {
     margin: 0.2rem 0;
     color: #444;
 }
+
 .card .price {
     font-weight: bold;
     color: #e0a800;

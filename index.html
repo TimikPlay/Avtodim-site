@@ -5,35 +5,69 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- SEO базові -->
-  <title>Автодім – Автозапчастини Ковель | Каталог, ціни, наявність</title>
-  <meta name="description" content="Автозапчастини у Ковелі – Автодім. Дивись каталог, перевір наявність і ціни, замовляй зручно онлайн або в магазині на вул. Ветеранів, 2." />
-  <meta name="keywords" content="автозапчастини Ковель, Автодім, автомагазин Ковель, запчастини, масла, фільтри, лампи, автоаксесуари, купити автозапчастини" />
+  <title>Автодім – Автозапчастини у Ковелі | Каталог, ціни, наявність в магазині</title>
+  <meta name="description" content="Автодім – магазин автозапчастин у Ковелі. Широкий каталог якісних автозапчастин, олив, фільтрів, ламп, автоаксесуарів. Перевір ціни та наявність онлайн." />
+  <meta name="keywords" content="автозапчастини Ковель, купити автозапчастини, автомагазин Ковель, масла, фільтри, лампи, автоаксесуари, Автодім" />
   <meta name="author" content="Chimurai" />
   <meta name="robots" content="index, follow" />
   <meta name="theme-color" content="#ffffff" />
 
-  <!-- Open Graph для соцмереж -->
-  <meta property="og:title" content="Автодім – Автозапчастини Ковель" />
-  <meta property="og:description" content="Каталог автозапчастин, ціни, наявність, замовлення онлайн. Магазин Автодім, Ковель." />
+  <meta property="og:title" content="Автодім – Автозапчастини у Ковелі" />
+  <meta property="og:description" content="Автодім – магазин автозапчастин у Ковелі. Каталог, ціни, наявність, замовлення онлайн." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://timikplay.github.io/Avtodim-site/index.html" />
   <meta property="og:image" content="https://timikplay.github.io/Avtodim-site/images/preview.jpg" />
   <meta property="og:locale" content="uk_UA" />
 
-  <!-- Favicon та стилі -->
-  <link rel="stylesheet" href="styles/style_index.css" />
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Автодім – Автозапчастини у Ковелі" />
+  <meta name="twitter:description" content="Перевір ціни, наявність та замовляй автозапчастини онлайн у магазині Автодім, Ковель." />
+  <meta name="twitter:image" content="https://timikplay.github.io/Avtodim-site/images/preview.jpg" />
 
-  <!-- Canonical для унікальності -->
   <link rel="canonical" href="https://timikplay.github.io/Avtodim-site/index.html" />
+  <link rel="alternate" href="https://timikplay.github.io/Avtodim-site/index.html" hreflang="uk" />
+
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="styles/style_index.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZN6WXD6MSF"></script>
   <script async src="/Avtodim-site/scripts/analytics.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AutoPartsStore",
+    "name": "Автодім",
+    "image": "https://timikplay.github.io/Avtodim-site/images/preview.jpg",
+    "description": "Автодім – магазин автозапчастин у Ковелі. Каталог, ціни, наявність, замовлення онлайн.",
+    "url": "https://timikplay.github.io/Avtodim-site/index.html",
+    "telephone": ["+380677860763", "+380689011715"],
+    "email": "avtodimkovel@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "вул. Ветеранів, 2",
+      "addressLocality": "Ковель",
+      "addressCountry": "UA"
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+      ],
+      "opens": "08:00",
+      "closes": "18:00"
+    },
+    "sameAs": []
+  }
+  </script>
 </head>
 
 <body>
   <div class="container">
-    <header class="header">
+    <header class="header" role="banner">
       <h1>Автодім – Магазин автозапчастин у Ковелі</h1>
       <nav>
         <a href="index.html">Головна</a>
@@ -44,13 +78,13 @@
       </nav>
     </header>
 
-    <main class="main">
+    <main class="main" role="main">
       <h2>Шукаєш автозапчастини у Ковелі?</h2>
       <p style="margin-bottom: 2rem;">Перевір наявність товарів, ціни, і зручно замовляй у магазині "Автодім"!</p>
       <a class="cta-button" href="catalog.html">Перейти до каталогу</a>
     </main>
 
-    <footer class="footer">
+    <footer class="footer" role="contentinfo">
       <div class="footer-content">
         <div class="footer-section contact">
           <h3>Контакти</h3>
@@ -64,28 +98,28 @@
           </p>
         </div>
 
-        <div class="footer-section schedule">
-          <h3>Графік роботи</h3>
+        <section class="footer-section schedule" aria-labelledby="footer-schedule">
+          <h3 id="footer-schedule">Графік роботи</h3>
           <p>Пн–Нд: 08:00–18:00</p>
-        </div>
+        </section>
 
-        <div class="footer-section nav">
-          <h3>Навігація</h3>
+        <section class="footer-section nav" aria-labelledby="footer-nav">
+          <h3 id="footer-nav">Навігація</h3>
           <ul>
             <li><a href="catalog.html">Каталог</a></li>
             <li><a href="privacy.html">Політика конфіденційності</a></li>
             <li><a href="delivery.html">Доставка та оплата</a></li>
           </ul>
-        </div>
+        </section>
 
-        <div class="footer-section socials">
-          <h3>Ми в соцмережах</h3>
+        <section class="footer-section socials" aria-labelledby="footer-socials">
+          <h3 id="footer-socials">Ми в соцмережах</h3>
           <p>—</p>
-        </div>
+        </section>
 
-        <div class="footer-section feedback">
-          <a class="feedback-button" href="contact.html">Написати нам</a>
-        </div>
+        <section class="footer-section feedback" aria-labelledby="footer-feedback">
+          <a class="feedback-button" href="contact.html" aria-label="Написати нам">Написати нам</a>
+        </section>
       </div>
 
       <div class="footer-bottom">
