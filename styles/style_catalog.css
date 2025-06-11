@@ -250,6 +250,10 @@ p {
 
 .footer p {
   text-align: left;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #eee;
+  text-decoration: none;
 }
 
 .footer-section ul {
