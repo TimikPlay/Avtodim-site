@@ -40,7 +40,6 @@ main {
 }
 
 .filters {
-    margin-bottom: 1.5rem;
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
@@ -170,11 +169,11 @@ select:focus {
 }
 .stats {
     font-size: 0.9rem;
-    margin-bottom: 1rem;
+    margin-top: 0.2rem;
     color: #333;
     text-align: center;
 }
-.show-all {
+.show-more {
     margin: 1.5rem auto 0;
     display: block;
     padding: 0.7rem 2rem;
@@ -187,7 +186,7 @@ select:focus {
     max-width: 200px;
     transition: background-color 0.3s ease;
 }
-.show-all:hover {
+.show-more:hover {
     background-color: #e0a800;
 }
 
@@ -306,6 +305,58 @@ p {
   font-size: 0.75rem;
   margin-left: auto;
 }
+
+
+.filters-block {
+      height: auto;
+      max-width: 800px;
+      margin: 4rem auto;
+      padding: 2rem;
+      background: #fff;
+      border-radius: 1rem;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      flex-direction: row;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+      padding-bottom: 1rem;
+    }
+
+    .category-filters{
+      flex-direction: row;
+      display: flex;
+      height: auto;
+      width: 100%;
+      justify-content: center;
+    }    
+
+    .data-filters{
+      flex-direction: column;
+      display: flex;
+      height: auto;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .data-filters div{
+      flex-direction: row;
+      display: flex;
+      height: auto;
+      width: 100%;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    #filter-category {
+      border-radius: 12px 0 0 12px;
+    }
+
+    #filter-group {
+      border-radius: 0;
+    }
+
+    #filter-subgroup {
+      border-radius: 0 12px 12px 0;
+    }
 
 @media (max-width: 600px) {
   .card {

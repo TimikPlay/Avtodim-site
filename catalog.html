@@ -25,6 +25,27 @@
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZN6WXD6MSF"></script>
   <script async src="/Avtodim-site/scripts/analytics.js"></script>
+  <style>
+    .placeholder {
+      max-width: 700px;
+      margin: 4rem auto;
+      padding: 2rem;
+      background: #fff;
+      border-radius: 1rem;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+    .placeholder h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+    .placeholder p {
+      font-size: 1.1rem;
+      color: #666;
+    }
+
+  </style>
 </head>
 <body>
   <div class="container">
@@ -39,49 +60,77 @@
     </header>
 
     <main class="main">
+      <section class="placeholder">
+        <h2>Сторінка в розробці</h2>
+        <p>Сайт перебуває на етапі активної розробки та тестування,<br>
+        Слідкуйте за оновленнями.</p>
+      </section>
       <h2>Знайди потрібні запчастини легко</h2>
       <p>Використай фільтри, щоб швидко знайти товар, який тобі потрібен.</p>
+      <div>
+        <section class="filters-block" style="margin-bottom: 1rem;">
+          <div class="filters">
+            <label for="filter-category" style="width: 100%;">
+              <span>Категорія/Група/Підгрупа</span>
+              <div class="category-filters" style="width: 100%;">
+                <select id="filter-category" name="filter-category">
+                  <option value="">Усі</option>
+                </select>
+                <select id="filter-group" name="filter-group" disabled>
+                  <option value="">Усі</option>
+                </select>
+                <select id="filter-subgroup" name="filter-subgroup" disabled>
+                  <option value="">Усі</option>
+                </select>
+              </div>
+            </label>
 
-      <div class="filters">
-        <div class="category-filters">
-          <label>Категорія:
-            <select id="filter-category">
-              <option value="">Усі</option>
-            </select>
-          </label>
-          <label>Група:
-            <select id="filter-group" disabled>
-              <option value="">Усі</option>
-            </select>
-          </label>
-          <label>Підгрупа:
-            <select id="filter-subgroup" disabled>
-              <option value="">Усі</option>
-            </select>
-          </label>
-        </div>
-        
-        <div class="data-filters">
-          <label>Наявність:
-            <select id="filter-stock">
-              <option value="">Усі</option>
-              <option value="так">В наявності</option>
-              <option value="ні">Немає</option>
-            </select>
-          </label>
-          <label>Макс. ціна:
-            <input type="number" id="filter-price" placeholder="Напр. 1000" />
-          </label>
-          <label>Пошук по назві, опису, індексу:
-            <input type="text" id="filter-name" placeholder="Введіть текст для пошуку" />
-          </label>
-        </div>
-        
+            <div class="data-filters">
+              <div>
+                <label for="filter-price"><span>Макс. ціна:</span>
+                  <input type="number" id="filter-price" name="filter-price" placeholder="Напр. 1000" min="0" />
+                </label>
+
+                <label for="filter-name"><span>Пошук по назві, опису, індексу:</span>
+                  <input type="text" id="filter-name" name="filter-name" placeholder="Введіть текст для пошуку" autocomplete="off" />
+                </label>
+              </div>
+
+              <div>
+                <label for="filter-stock"><span>Наявність:</span>
+                  <select id="filter-stock" name="filter-stock">
+                    <option value="">Усі</option>
+                    <option value="так">В наявності</option>
+                    <option value="ні">Немає</option>
+                  </select>
+                </label>
+                
+                <label for="filter-brand"><span>Виробник:</span>
+                  <select id="filter-brand" name="filter-brand">
+                    <option value="">Усі виробники</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+            <div>
+              <label for="sort"><span>Сортування:</span>
+                <select id="sort" name="sort">
+                  <option value="">Без сортування</option>
+                  <option value="price-asc">Ціна ↑</option>
+                  <option value="price-desc">Ціна ↓</option>
+                  <option value="index-asc">Індекс ↑</option>
+                  <option value="index-desc">Індекс ↓</option>
+                  <option value="name-asc">Назва A→Я</option>
+                  <option value="name-desc">Назва Я→A</option>
+                </select>
+              </label>
+              <div class="stats" id="stats"></div>
+            </div>
+        </section>
       </div>
 
-      <div class="stats" id="stats"></div>
       <div class="grid" id="catalog"></div>
-      <button class="show-all" onclick="resetFilters()">Показати всі товари</button>
+      <button class="show-more" id="show-more" onclick="showMoreItems()" style="display:none;">Показати ще</button>
     </main>
 
     <footer class="footer">
