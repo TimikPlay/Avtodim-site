@@ -367,4 +367,22 @@ p {
     grid-template-columns: repeat(auto-fit, minmax(110px, 0.5fr));
     gap: 0.6rem;
   }
+  .category-filters{
+      display: block;
+    }    
+  #filter-category {
+      border-radius: 12px 12px 0 0;
+      text-align: center;
+      width: 100%;
+    }
+  #filter-group {
+      text-align: center;
+      width: 100%;
+    }
+  #filter-subgroup {
+    border-radius: 0 0 12px 12px;
+    text-align: center;
+    width: 100%;
+  }
 }
+
