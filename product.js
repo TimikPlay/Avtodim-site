@@ -37,6 +37,7 @@ if (!productIndex) {
             <p><strong>Опис:</strong> ${item.Опис || 'Немає опису.'}</p>
             <p><strong>Ціна:</strong> ${item.Ціна ? Number(item.Ціна).toLocaleString() + ' грн' : 'Не вказана'}</p>
             <p><strong>Наявність:</strong> ${stockDisplay}</p>
+	    <p><strong>Артикул:</strong> ${item.Артикул || 'Артикул не вказаний.'}</p>
             <p><strong>Код:</strong> ${item.Код || '-'}</p>
             <div class="product-buttons">
                 <button disabled>🛒 Додати в кошик</button>
