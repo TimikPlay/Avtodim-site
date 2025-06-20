@@ -308,55 +308,59 @@ p {
 
 
 .filters-block {
-      height: auto;
-      max-width: 800px;
-      margin: 4rem auto;
-      padding: 2rem;
-      background: #fff;
-      border-radius: 1rem;
-      text-align: center;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-      flex-direction: row;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-      padding-bottom: 1rem;
-    }
+  height: auto;
+  max-width: 800px;
+  margin: 4rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 1rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  flex-direction: row;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+  padding-bottom: 1rem;
+}
 
-    .category-filters{
-      flex-direction: row;
-      display: flex;
-      height: auto;
-      width: 100%;
-      justify-content: center;
-    }    
+.category-filters{
+  flex-direction: row;
+  display: flex;
+  height: auto;
+  width: 100%;
+  justify-content: center;
+}    
 
-    .data-filters{
-      flex-direction: column;
-      display: flex;
-      height: auto;
-      width: 100%;
-      justify-content: center;
-    }
+.data-filters{
+  flex-direction: column;
+  display: flex;
+  height: auto;
+  width: 100%;
+  justify-content: center;
+}
 
-    .data-filters div{
-      flex-direction: row;
-      display: flex;
-      height: auto;
-      width: 100%;
-      justify-content: center;
-      gap: 1rem;
-    }
+.data-filters div{
+  flex-direction: row;
+  display: flex;
+  height: auto;
+  width: 100%;
+  justify-content: center;
+  gap: 1rem;
+}
 
-    #filter-category {
-      border-radius: 12px 0 0 12px;
-    }
+#filter-category {
+  border-radius: 12px 0 0 12px;
+}
 
-    #filter-group {
-      border-radius: 0;
-    }
+#filter-group {
+  border-radius: 0;
+}
 
-    #filter-subgroup {
-      border-radius: 0 12px 12px 0;
-    }
+#filter-subgroup {
+  border-radius: 0 12px 12px 0;
+}
+
+.header nav a {
+  white-space: nowrap;
+}
 
 @media (max-width: 600px) {
   .card {
@@ -383,6 +387,34 @@ p {
     border-radius: 0 0 12px 12px;
     text-align: center;
     width: 100%;
+  }
+  .data-filters label {
+      font-size: 0.7rem;
+    }
+  #filter-price,
+  #filter-stock {
+    border-radius: 12px 0 0 12px;
+  }
+  #filter-name,
+  #filter-brand {
+    border-radius: 0 12px 12px 0;
+  }
+
+  .data-filters div {
+      gap: 0;
+    }
+  
+  .card a {
+    height: 100%;
+    display: block;
+  }
+
+  .card p {
+    line-height: normal;
+  }
+
+  .header nav a {
+  display: list-item;
   }
 }
 

@@ -249,8 +249,16 @@
       min-height: 300px;
     }
 
+    .header nav a {
+      white-space: nowrap;
+    }
+
     /* Адаптив */
     @media (max-width: 600px) {
+      .header nav a {
+        display: list-item;
+        }
+
       header, footer {
         padding: 0.8rem 0.6rem;
         font-size: 1rem;

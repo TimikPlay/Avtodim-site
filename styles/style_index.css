@@ -270,3 +270,13 @@ main {
   text-decoration: underline;
   color: #483d8b;
 }
+
+.header nav a {
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .header nav a {
+  display: list-item;
+  }
+}

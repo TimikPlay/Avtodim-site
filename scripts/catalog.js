@@ -10,6 +10,7 @@ const nameInput = document.getElementById('filter-name');
 const brandSelect = document.getElementById('filter-brand');
 const sortSelect = document.getElementById('sort');
 
+
 let data = [];
 let displayedCount = 35;
 let filteredData = [];
@@ -335,6 +336,7 @@ function filterAndShow(reset = false) {
 function showCatalog() {
   catalogEl.innerHTML = '';
   const itemsToShow = filteredData.slice(0, displayedCount);
+  const isMobile = window.innerWidth <= 768;
 
   if (itemsToShow.length === 0) {
     catalogEl.innerHTML = '<p>Товари не знайдені за поточними фільтрами.</p>';
@@ -349,7 +351,18 @@ function showCatalog() {
 
     const card = document.createElement('div');
     card.className = 'card';
-    card.innerHTML = `<a href="product.html?index=${encodeURIComponent(item.Індекс || '')}" style="text-decoration: none; color: inherit;">
+    card.innerHTML = isMobile ?  `
+      <a href="product.html?index=${encodeURIComponent(item.Індекс || '')}" style="text-decoration: none; color: inherit;">
+        <img src="${item.Фото?.trim() || 'https://i.postimg.cc/8c3tnzSz/1211233-200.png'}" alt="${item.Назва?.trim() || 'Без назви'}" />
+        <h3>${item.Назва?.trim() || 'Без назви'}</h3>
+        <p class="description">${truncateText(item.Опис?.trim(), 37)}</p>
+        <p class="price">${item.Ціна ? item.Ціна.toLocaleString() + ' грн' : '<small>Ціна не вказана</small>'}</p>
+        <p><strong>${stockVal === 'так' ? 'В наявності' : 'Немає'}</strong></p>
+        <p class="index"><small>Індекс: ${item.Індекс?.trim() || 'Невідомо'}</small></p>
+        <div class="watermark">Автодім</div>
+      </a>
+    ` : `
+      <a href="product.html?index=${encodeURIComponent(item.Індекс || '')}" style="text-decoration: none; color: inherit;">
         <img src="${item.Фото?.trim() || 'https://i.postimg.cc/8c3tnzSz/1211233-200.png'}" alt="${item.Назва?.trim() || 'Без назви'}" />
         <h3>${item.Назва?.trim() || 'Без назви'}</h3>
         <p class="index">Індекс: ${item.Індекс?.trim() || 'Невідомо'}</p>
