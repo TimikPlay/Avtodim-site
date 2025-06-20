@@ -131,7 +131,7 @@ function meetsCurrentFilters(item, currentFilterValues) {
   if (maxPrice && item.Ціна > maxPrice) return false;
 
   if (searchText) {
-    const combined = `${item.Назва} ${item.Опис} ${item.Індекс}`.toLowerCase();
+    const combined = `${item.Назва} ${item.Опис} ${item.Код}`.toLowerCase();
     if (!combined.includes(searchText)) return false;
   }
 
@@ -319,8 +319,8 @@ function filterAndShow(reset = false) {
     switch (sortOption) {
       case 'price-asc': return a.Ціна - b.Ціна;
       case 'price-desc': return b.Ціна - a.Ціна;
-      case 'index-asc': return (a.Індекс || '').localeCompare(b.Індекс || '', undefined, { numeric: true });
-      case 'index-desc': return (b.Індекс || '').localeCompare(a.Індекс || '', undefined, { numeric: true });
+      case 'index-asc': return (a.Код || '').localeCompare(b.Код || '', undefined, { numeric: true });
+      case 'index-desc': return (b.Код || '').localeCompare(a.Код || '', undefined, { numeric: true });
       case 'name-asc': return (a.Назва || '').localeCompare(b.Назва || '');
       case 'name-desc': return (b.Назва || '').localeCompare(a.Назва || '');
       default: return 0;
@@ -352,20 +352,20 @@ function showCatalog() {
     const card = document.createElement('div');
     card.className = 'card';
     card.innerHTML = isMobile ?  `
-      <a href="product.html?index=${encodeURIComponent(item.Індекс || '')}" style="text-decoration: none; color: inherit;">
+      <a href="product.html?index=${encodeURIComponent(item.Код || '')}" style="text-decoration: none; color: inherit;">
         <img src="${item.Фото?.trim() || 'https://i.postimg.cc/8c3tnzSz/1211233-200.png'}" alt="${item.Назва?.trim() || 'Без назви'}" />
         <h3>${item.Назва?.trim() || 'Без назви'}</h3>
         <p class="description">${truncateText(item.Опис?.trim(), 37)}</p>
         <p class="price">${item.Ціна ? item.Ціна.toLocaleString() + ' грн' : '<small>Ціна не вказана</small>'}</p>
         <p><strong>${stockVal === 'так' ? 'В наявності' : 'Немає'}</strong></p>
-        <p class="index"><small>Індекс: ${item.Індекс?.trim() || 'Невідомо'}</small></p>
+        <p class="index"><small>Код: ${item.Код?.trim() || 'Невідомо'}</small></p>
         <div class="watermark">Автодім</div>
       </a>
     ` : `
-      <a href="product.html?index=${encodeURIComponent(item.Індекс || '')}" style="text-decoration: none; color: inherit;">
+      <a href="product.html?index=${encodeURIComponent(item.Код || '')}" style="text-decoration: none; color: inherit;">
         <img src="${item.Фото?.trim() || 'https://i.postimg.cc/8c3tnzSz/1211233-200.png'}" alt="${item.Назва?.trim() || 'Без назви'}" />
         <h3>${item.Назва?.trim() || 'Без назви'}</h3>
-        <p class="index">Індекс: ${item.Індекс?.trim() || 'Невідомо'}</p>
+        <p class="index">Код: ${item.Код?.trim() || 'Невідомо'}</p>
         <p class="description">${truncateText(item.Опис?.trim(), 50)}</p>
         <p class="price">${item.Ціна ? item.Ціна.toLocaleString() + ' грн' : 'Ціна не вказана'}</p>
         <p>Наявність: <strong>${stockVal === 'так' ? 'В наявності' : 'Немає'}</strong></p>
