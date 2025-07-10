@@ -4,22 +4,24 @@ const showMoreBtn = document.getElementById('show-more');
 const categorySelect = document.getElementById('filter-category');
 const groupSelect = document.getElementById('filter-group');
 const subgroupSelect = document.getElementById('filter-subgroup');
-const stockSelect = document.getElementById('filter-stock');
+const stockSelect = document.getElementById('filter-stock'); // Виправлено typo: document.getElementById
 const priceInput = document.getElementById('filter-price');
 const nameInput = document.getElementById('filter-name');
 const brandSelect = document.getElementById('filter-brand');
 const sortSelect = document.getElementById('sort');
 
 
-let data = [];
-let displayedCount = 35;
-let filteredData = [];
-let availableFilters = {}; // Зберігатиме доступні опції фільтрів
+let data = []; // Зберігає всі завантажені дані
+let displayedCount = 35; // Кількість товарів, що відображаються за раз
+let filteredData = []; // Дані після застосування фільтрів
+let availableFilters = {}; // Зберігатиме доступні опції фільтрів для випадаючих списків
 
+// Зберігаємо позицію прокрутки перед закриттям сторінки
 window.addEventListener('beforeunload', () => {
   sessionStorage.setItem('scrollTop', window.scrollY);
 });
 
+// Функція для збереження поточних значень фільтрів у sessionStorage
 function storeFilters() {
   sessionStorage.setItem('filter-category', categorySelect.value);
   sessionStorage.setItem('filter-group', groupSelect.value);
@@ -31,7 +33,7 @@ function storeFilters() {
   sessionStorage.setItem('sort', sortSelect.value);
 }
 
-// Обробники подій для фільтрів, що скидають залежні фільтри
+// Обробники подій для випадаючих списків фільтрів (при зміні скидають залежні фільтри)
 [
   categorySelect,
   groupSelect,
@@ -41,45 +43,56 @@ function storeFilters() {
   subgroupSelect
 ].forEach(el => {
   el.addEventListener('change', () => {
+    // Якщо змінюється категорія, скидаємо групу, підгрупу та наявність
     if (el === categorySelect) {
       groupSelect.value = '';
       subgroupSelect.value = '';
       stockSelect.value = '';
     }
+    // Якщо змінюється група, скидаємо підгрупу та наявність
     if (el === groupSelect) {
       subgroupSelect.value = '';
       stockSelect.value = '';
     }
+    // Якщо змінюється підгрупа, скидаємо наявність
     if (el === subgroupSelect) {
       stockSelect.value = '';
     }
 
-    storeFilters();
-    filterAndShow(true); // Перезапускаємо фільтрацію та оновлення фільтрів
+    storeFilters(); // Зберігаємо фільтри
+    filterAndShow(true); // Перезапускаємо фільтрацію та оновлення фільтрів (скидаємо лічильник відображених товарів)
   });
 });
 
-// Обробники подій для текстових полів фільтрів
+// Обробники подій для текстових полів фільтрів (ціна, назва)
 [priceInput, nameInput].forEach(el => {
   el.addEventListener('input', () => {
-    storeFilters();
-    filterAndShow(true); // Перезапускаємо фільтрацію та оновлення фільтрів
+    storeFilters(); // Зберігаємо фільтри
+    filterAndShow(true); // Перезапускаємо фільтрацію та оновлення фільтрів (скидаємо лічильник відображених товарів)
   });
 });
 
-// Завантаження даних та ініціалізація
+// Завантаження даних та ініціалізація сторінки
 fetch('https://opensheet.vercel.app/1ahWQuOhEWDdSq2IA-COaztHe1Fmwzs82zpLTL8jSfc8/Лист1')
   .then(res => res.json())
   .then(json => {
+    // **** КЛЮЧОВА ЗМІНА ТУТ: Фільтруємо об'єкти, які не мають достатньо даних для картки
     data = json.map(item => {
+      // Перетворюємо ціну на число, якщо її немає, встановлюємо 0
       item.Ціна = Number(item.Ціна) || 0;
       return item;
+    }).filter(item => {
+      // Фільтруємо об'єкти, які не мають Коду АБО Назви (або обидва порожні)
+      // Це дозволить відкинути порожні рядки з таблиці.
+      const hasCode = item.Код && String(item.Код).trim() !== '';
+      const hasName = item.Назва && String(item.Назва).trim() !== '';
+      return hasCode || hasName; // Елемент вважається валідним, якщо має хоча б код АБО назву
     });
 
-    initAllFiltersOptions(data);
-    filterAndShow(true); // Перше завантаження, оновлення фільтрів
+    initAllFiltersOptions(data); // Ініціалізуємо всі доступні опції фільтрів
+    filterAndShow(true); // Перше завантаження, оновлюємо фільтри та відображаємо товари
 
-    // Відновлення збережених значень фільтрів
+    // Відновлення збережених значень фільтрів з sessionStorage
     categorySelect.value = sessionStorage.getItem('filter-category') || '';
     groupSelect.value = sessionStorage.getItem('filter-group') || '';
     subgroupSelect.value = sessionStorage.getItem('filter-subgroup') || '';
@@ -89,8 +102,9 @@ fetch('https://opensheet.vercel.app/1ahWQuOhEWDdSq2IA-COaztHe1Fmwzs82zpLTL8jSfc8
     brandSelect.value = sessionStorage.getItem('filter-brand') || '';
     sortSelect.value = sessionStorage.getItem('sort') || '';
 
-    filterAndShow(false); // Застосовуємо відновлені фільтри
+    filterAndShow(false); // Застосовуємо відновлені фільтри без скидання лічильника відображених товарів
 
+    // Відновлення позиції прокрутки
     const savedScroll = sessionStorage.getItem('scrollTop');
     if (savedScroll) {
       setTimeout(() => window.scrollTo(0, parseInt(savedScroll)), 100);
@@ -109,18 +123,23 @@ function getUniqueFilterOptions(items, property, currentFilterValues) {
       options.add(item[property]);
     }
   });
-  return [...options].sort();
+  return [...options].sort(); // Повертаємо відсортований масив унікальних значень
 }
 
 // Допоміжна функція для перевірки, чи елемент відповідає обраним фільтрам
 function meetsCurrentFilters(item, currentFilterValues) {
   const { cat, group, subgroup, stock, brand, maxPrice, searchText } = currentFilterValues;
 
+  // Перевірка на відповідність категорії
   if (cat && item.Категорія?.toLowerCase() !== cat) return false;
+  // Перевірка на відповідність групі
   if (group && item.Група?.toLowerCase() !== group) return false;
+  // Перевірка на відповідність підгрупі
   if (subgroup && item.Підгрупа?.toLowerCase() !== subgroup) return false;
+  // Перевірка на відповідність виробнику
   if (brand && item.Виробник?.toLowerCase() !== brand) return false;
 
+  // Перевірка наявності
   if (stock) {
     let itemStockVal = (!item.Наявність || item.Наявність === '0') ? 'ні' :
       (!isNaN(Number(item.Наявність)) && Number(item.Наявність) > 0) ? 'так' :
@@ -128,14 +147,16 @@ function meetsCurrentFilters(item, currentFilterValues) {
     if ((stock === 'так' && itemStockVal !== 'так') || (stock === 'ні' && itemStockVal !== 'ні')) return false;
   }
 
+  // Перевірка ціни (менше або дорівнює максимальній ціні)
   if (maxPrice && item.Ціна > maxPrice) return false;
 
+  // Пошук за текстом (назва, опис, код)
   if (searchText) {
     const combined = `${item.Назва} ${item.Опис} ${item.Код}`.toLowerCase();
     if (!combined.includes(searchText)) return false;
   }
 
-  return true;
+  return true; // Якщо пройшов усі перевірки, елемент відповідає фільтрам
 }
 
 // Ініціалізує всі опції фільтрів на основі повного набору даних
@@ -146,7 +167,6 @@ function initAllFiltersOptions(dataToProcess) {
   availableFilters.brands = [...new Set(dataToProcess.map(item => item.Виробник).filter(Boolean))].sort();
 }
 
-// Функція оновлення випадаючих списків фільтрів
 // Функція оновлення випадаючих списків фільтрів
 function updateFilterOptions() {
   const currentFilterValues = {
@@ -169,12 +189,10 @@ function updateFilterOptions() {
   });
 
   // Оновлення груп
-  // **** ЗМІНА ТУТ: Ми створюємо тимчасовий об'єкт фільтрів, де subgroup та group встановлені на null.
-  // Це дозволяє отримати ВСІ групи, які відповідають лише обраній категорії (і іншим неієрархічним фільтрам).
   const filtersForGroupOptions = {
-    cat: currentFilterValues.cat, // Враховуємо обрану категорію
-    group: null, // Не враховуємо поточний вибір групи
-    subgroup: null, // <--- КЛЮЧОВА ЗМІНА: Не враховуємо підгрупу для фільтрації опцій групи
+    cat: currentFilterValues.cat,
+    group: null,
+    subgroup: null,
     stock: currentFilterValues.stock,
     brand: currentFilterValues.brand,
     maxPrice: currentFilterValues.maxPrice,
@@ -183,18 +201,16 @@ function updateFilterOptions() {
 
   const filteredGroups = getUniqueFilterOptions(data, 'Група', filtersForGroupOptions);
   updateSelectOptions(groupSelect, filteredGroups, item => {
-    // При перевірці чи опція групи актуальна, знову ж таки, ігноруємо subgroup
     const tempCurrentFilterValuesForPredicate = {
       ...currentFilterValues,
       group: item.toLowerCase(),
-      subgroup: null // Ігноруємо підгрупу, коли перевіряємо чи є товари для цієї групи
+      subgroup: null
     };
     return data.some(dItem => meetsCurrentFilters(dItem, tempCurrentFilterValuesForPredicate));
   });
-  groupSelect.disabled = !currentFilterValues.cat; // Група залежить від категорії
+  groupSelect.disabled = !currentFilterValues.cat;
 
   // Оновлення підгруп
-  // Підгрупа повинна фільтруватися за категорією та групою.
   const filteredSubgroups = getUniqueFilterOptions(data, 'Підгрупа', { ...currentFilterValues,
     subgroup: null
   });
@@ -205,8 +221,7 @@ function updateFilterOptions() {
     };
     return data.some(dItem => meetsCurrentFilters(dItem, tempCurrentFilterValues));
   });
-  subgroupSelect.disabled = !currentFilterValues.cat || !currentFilterValues.group; // Підгрупа залежить від категорії та групи
-
+  subgroupSelect.disabled = !currentFilterValues.cat || !currentFilterValues.group;
 
   // Оновлення виробників
   const filteredBrands = getUniqueFilterOptions(data, 'Виробник', { ...currentFilterValues,
@@ -233,7 +248,7 @@ function updateFilterOptions() {
       brand: currentFilterValues.brand,
       maxPrice: currentFilterValues.maxPrice,
       searchText: currentFilterValues.searchText,
-      stock: null // Ігноруємо поточний фільтр наявності при перевірці
+      stock: null
     });
   });
 
@@ -248,7 +263,7 @@ function updateFilterOptions() {
       brand: currentFilterValues.brand,
       maxPrice: currentFilterValues.maxPrice,
       searchText: currentFilterValues.searchText,
-      stock: null // Ігноруємо поточний фільтр наявності при перевірці
+      stock: null
     });
   });
 
@@ -299,6 +314,7 @@ function updateSelectOptions(selectElement, options, filterPredicate) {
   }
 }
 
+// Головна функція для фільтрації та відображення даних
 function filterAndShow(reset = false) {
   if (reset) displayedCount = 35;
 
@@ -314,6 +330,8 @@ function filterAndShow(reset = false) {
 
   filteredData = data.filter(item => meetsCurrentFilters(item, currentFilterValues));
 
+
+  // Сортування відфільтрованих даних
   const sortOption = sortSelect.value;
   filteredData.sort((a, b) => {
     switch (sortOption) {
@@ -327,17 +345,19 @@ function filterAndShow(reset = false) {
     }
   });
 
-  updateFilterOptions(); // Оновлюємо фільтри після фільтрації даних
+  updateFilterOptions(); // Оновлюємо випадаючі списки фільтрів після фільтрації даних
 
-  showCatalog();
-  showStats();
+  showCatalog(); // Відображаємо товари
+  showStats(); // Оновлюємо статистику
 }
 
+// Функція для відображення каталогу товарів
 function showCatalog() {
-  catalogEl.innerHTML = '';
-  const itemsToShow = filteredData.slice(0, displayedCount);
-  const isMobile = window.innerWidth <= 768;
+  catalogEl.innerHTML = ''; // Очищаємо вміст каталогу
+  const itemsToShow = filteredData.slice(0, displayedCount); // Беремо тільки певну кількість товарів
+  const isMobile = window.innerWidth <= 768; // Перевіряємо, чи це мобільна версія
 
+  // Якщо товарів немає, виводимо повідомлення та приховуємо кнопку "Показати більше"
   if (itemsToShow.length === 0) {
     catalogEl.innerHTML = '<p>Товари не знайдені за поточними фільтрами.</p>';
     showMoreBtn.style.display = 'none';
@@ -345,13 +365,20 @@ function showCatalog() {
   }
 
   itemsToShow.forEach(item => {
+    // Ця перевірка залишається як додатковий запобіжник, хоча основна фільтрація вже відбулась
+    if (!item.Код && !item.Назва) { // Якщо немає ні Коду, ні Назви, пропускаємо
+      return;
+    }
+
+    // Визначаємо значення наявності
     const stockVal = (!item.Наявність || item.Наявність === '0') ? 'ні' :
       (!isNaN(Number(item.Наявність)) && Number(item.Наявність) > 0) ? 'так' :
       (item.Наявність.toString().toLowerCase() === 'так' ? 'так' : 'ні');
 
     const card = document.createElement('div');
     card.className = 'card';
-    card.innerHTML = isMobile ?  `
+    // Шаблон картки товару для мобільних та десктопних пристроїв
+    card.innerHTML = isMobile ? `
       <a href="product.html?index=${encodeURIComponent(item.Код || '')}" style="text-decoration: none; color: inherit;">
         <img src="${item.Фото?.trim() || 'https://i.postimg.cc/8c3tnzSz/1211233-200.png'}" alt="${item.Назва?.trim() || 'Без назви'}" />
         <h3>${item.Назва?.trim() || 'Без назви'}</h3>
@@ -375,19 +402,23 @@ function showCatalog() {
     catalogEl.appendChild(card);
   });
 
+  // Показуємо або приховуємо кнопку "Показати більше"
   showMoreBtn.style.display = (filteredData.length > displayedCount) ? 'block' : 'none';
 }
 
+// Функція для відображення статистики (кількість знайдених товарів)
 function showStats() {
   statsEl.textContent = `Знайдено товарів: ${filteredData.length}`;
 }
 
+// Функція для обрізання тексту опису
 function truncateText(text, maxLength) {
   if (!text) return 'Опис відсутній.';
   return text.length > maxLength ? text.slice(0, maxLength) + '…' : text;
 }
 
+// Функція для завантаження більшої кількості товарів
 function showMoreItems() {
-  displayedCount += 35;
-  showCatalog();
+  displayedCount += 35; // Збільшуємо лічильник
+  showCatalog(); // Відображаємо оновлений каталог
 }
